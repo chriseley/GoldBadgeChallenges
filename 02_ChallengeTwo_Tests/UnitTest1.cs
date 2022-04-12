@@ -1,12 +1,27 @@
 using Xunit;
 
-namespace _02_ChallengeTwo_Tests;
-
-public class UnitTest1
-{
-    [Fact]
-    public void Test1()
+ [TestClass]
+    public class RepositoryTests
     {
+        private ClaimRepository _repo;
+        private Claim newClaim;
 
+
+        [TestInitialize]
+        public void Seed()
+        {
+            _repo = new ClaimRepository();
+            newClaim = new Claim();
+        }
+
+        [TestMethod]
+        public void AddClaimToQueueTest()
+        {
+            _repo.AddClaimToQueue(newClaim);
+
+            int expected = 1;
+            int actual = _repo.GetAllClaims().Count;
+
+            Assert.AreEqual(actual, expected);
+        }
     }
-}
